@@ -1,0 +1,19 @@
+<div class="container">
+  <div id="search">
+    <input type="text" placeholder=" Search">
+  </div>
+  <div id="columns">
+    <div class="column">
+      <h3>ENGLISH</h3>
+      <ul id="englishWords">
+        <li class="word" *ngFor="let word of englishWords">{{ word }}</li>
+      </ul>
+    </div>
+    <div class="column">
+      <h3>JAPANESE</h3>
+      <ul id="japaneseWords">
+        <li class="word" *ngFor="let word of japaneseWords">{{ word }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

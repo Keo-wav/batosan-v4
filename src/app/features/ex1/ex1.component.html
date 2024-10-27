@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="stats">
+  </div>
+  <div class="columns">
+    <div class="column">
+      <button class="button"
+              *ngFor="let word of shuffledEnglishWords; let i = index"
+              (click)="onClick(word, i)"
+              [ngClass]="buttonStates[i]">
+        {{ word }}
+      </button>
+    </div>
+    <div class="column">
+      <button class="button"
+              *ngFor="let word of shuffledJapaneseWords; let i = index"
+              (click)="onClick(word, i + shuffledEnglishWords.length)"
+              [ngClass]="buttonStates[i + shuffledEnglishWords.length]">
+        {{ word }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isAlertVisible" class="alert-modal">
+  <div class="alert-content">
+    <p>{{this.alertMessage}}</p>
+    <button (click)="closeAlert()">OK</button>
+  </div>
+</div>

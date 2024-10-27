@@ -1,0 +1,15 @@
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  gap: 1rem;
+}
+
+.button {
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(85, 85, 85, 0.63);
+}
