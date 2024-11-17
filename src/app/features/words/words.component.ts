@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../../core/services/api.service';
 import {FormControl} from '@angular/forms';
-import {BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map} from 'rxjs';
+import {BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map, Subject, takeUntil} from 'rxjs';
 
 @Component({
   selector: 'app-words',
   templateUrl: './words.component.html',
   styleUrl: './words.component.css'
 })
-export class WordsComponent implements OnInit {
+export class WordsComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   englishWords: string[] = [];
   japaneseWords: string[] = [];
   filteredEnglishWords$ = new BehaviorSubject<string[]>([]);
@@ -19,10 +20,13 @@ export class WordsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // combineLatest ensures that we receive the latest values from both observables together as a single array
     combineLatest([
       this.apiService.englishWords$,
       this.apiService.japaneseWords$,
-    ]).subscribe(([englishWords, japaneseWords]) => {
+    ])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([englishWords, japaneseWords]) => {
       this.englishWords = englishWords;
       this.japaneseWords = japaneseWords;
 
@@ -31,16 +35,6 @@ export class WordsComponent implements OnInit {
       this.filteredJapaneseWords$.next(this.japaneseWords);
     });
 
-    // this.apiService.englishWords$.subscribe(words => {
-    //   this.englishWords = words;
-    //   // console.log('English Words:', this.englishWords);
-    // });
-    //
-    // this.apiService.japaneseWords$.subscribe(words => {
-    //   this.japaneseWords = words;
-    //   // console.log('Japanese Words:', this.japaneseWords);
-    // });
-
     // Reactive search logic
     this.searchControl.valueChanges
       .pipe(
@@ -48,21 +42,27 @@ export class WordsComponent implements OnInit {
         map((searchTerm) => searchTerm || ''),
         distinctUntilChanged(),
         map((searchTerm: string) => searchTerm.trim().toLowerCase()),
-        map((searchTerm) => {
-          // Filter the English words
+        map((searchTerm: string) => {
+          const lowerCaseTerm = searchTerm.toLowerCase();
           const filteredIndices = this.englishWords
-            .map((word, index) => (word.toLowerCase().includes(searchTerm) ? index : -1))
+            .map((word, index) => (word.toLowerCase().includes(lowerCaseTerm) ? index : -1))
             .filter(index => index !== -1);
 
           return {
             english: filteredIndices.map(index => this.englishWords[index]),
             japanese: filteredIndices.map(index => this.japaneseWords[index])
           };
-        })
+        }),
+        takeUntil(this.destroy$) // Automatically unsubscribe on destroy
       )
       .subscribe(({ english, japanese }) => {
         this.filteredEnglishWords$.next(english);
         this.filteredJapaneseWords$.next(japanese);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(); // Signal all subscriptions to unsubscribe
+    this.destroy$.complete(); // Complete the subject
   }
 }
