@@ -1,13 +1,13 @@
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
   margin-top: 1rem;
   height: 80vh;
 }
 
 .stats {
-  height: 30vh;
+  height: 15vh;
   width: 91%;
   margin: 0 auto 1rem auto;
   border: 1px solid black;
