@@ -4,7 +4,7 @@ import { Ex1Component } from './features/ex1/ex1.component';
 import { WordsComponent } from './features/words/words.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'words', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
   { path: 'ex1', component: Ex1Component },
   { path: 'words', component: WordsComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' },

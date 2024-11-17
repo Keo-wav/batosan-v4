@@ -1,4 +1,14 @@
 h1 {
   text-align: center;
+  margin: 1rem auto;
+  position: relative;
+}
+
+aside {
+  text-align: center;
   margin: 0;
+  position: absolute;
+  top: 2.8rem;
+  right: 7rem;
+  font-size: smaller;
 }
