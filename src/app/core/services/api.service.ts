@@ -40,7 +40,8 @@ export class ApiService {
           const rows = response.values;
           this.wordsDatabase = rows.flat();
           this.processWords(this.wordsDatabase)
-          console.log('DATA EXTRACT & PROCESS SUCCESS :', this.englishWords, this.japaneseWords);
+          // console.log('DATA EXTRACT & PROCESS SUCCESS :', this.englishWords, this.japaneseWords);
+          console.log('DATA EXTRACT & PROCESS SUCCESS');
         } else {
           console.error('No data found in response:', response);
         }
