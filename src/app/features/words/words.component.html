@@ -1,27 +1,34 @@
-<div class="container">
-  <div id="search">
-    <input
-      [formControl]="searchControl"
-      type="text"
-      placeholder=" Search"
-    />
-  </div>
-  <div id="columns">
-    <div class="column">
-      <h3>ENGLISH</h3>
-      <ul id="englishWords">
-        <li class="word" *ngFor="let word of filteredEnglishWords$ | async">
-          {{ word }}
-        </li>
-      </ul>
+<div class="page-container">
+  <main class="content">
+    <div class="container">
+      <div id="search">
+        <input
+          [formControl]="searchControl"
+          type="text"
+          placeholder=" Search"
+        />
+      </div>
+      <div id="columns">
+        <div class="column">
+          <h3>ENGLISH</h3>
+          <ul id="englishWords">
+            <li class="word" *ngFor="let word of filteredEnglishWords$ | async">
+              {{ word }}
+            </li>
+          </ul>
+        </div>
+        <div class="column">
+          <h3>JAPANESE</h3>
+          <ul id="japaneseWords">
+            <li
+              class="word"
+              *ngFor="let word of filteredJapaneseWords$ | async"
+            >
+              {{ word }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="column">
-      <h3>JAPANESE</h3>
-      <ul id="japaneseWords">
-        <li class="word" *ngFor="let word of filteredJapaneseWords$ | async">
-          {{ word }}
-        </li>
-      </ul>
-    </div>
-  </div>
+  </main>
 </div>
