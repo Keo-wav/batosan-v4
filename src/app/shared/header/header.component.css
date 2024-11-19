@@ -8,6 +8,7 @@ h1 {
 
 .headerBackground {
   background-color: rgba(62, 62, 62, 0.78);
+  margin: 0 0.5rem;
 }
 
 aside {

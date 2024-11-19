@@ -11,10 +11,6 @@
 npm-debug.log
 yarn-error.log
 
-# Spicy backgrounds for the user
-/src/app/assets/imgs/2.webp
-/src/app/assets/imgs/3.webp
-
 # IDEs and editors
 .idea/
 .project

@@ -18,6 +18,8 @@
 h3 {
   text-align: center;
   margin: 0;
+  background-color: rgba(62, 62, 62, 0.78);
+  color: whitesmoke;
 }
 
 ul {
