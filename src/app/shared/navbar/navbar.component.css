@@ -8,8 +8,10 @@ ul {
 }
 
 .button {
-  border: 1px solid black;
+  border: 1px solid whitesmoke;
   padding: 0.5rem;
   border-radius: 5px;
-  box-shadow: 1px 1px 1px rgba(85, 85, 85, 0.63);
+  box-shadow: 1px 1px 1px rgba(237, 231, 231, 0.63);
+  color: white;
+  background-color: rgba(62, 62, 62, 0.78);
 }

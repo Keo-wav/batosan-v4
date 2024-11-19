@@ -1,5 +1,14 @@
-body {
+html {
   font-family: Poppins, sans-serif;
   display: flex;
   flex-direction: column;
+
+  height: 100%;
+  background-image: url("app/assets/imgs/1.jpg");
+  /*background-image: url("app/assets/imgs/2.webp");*/
+  /*background-image: url("app/assets/imgs/3.webp");*/
+  /*background-image: url("https://preview.redd.it/feixiao-sport-and-hooters-variants-only4u-art-v0-vzzbmsgehzyd1.jpg?width=892&format=pjpg&auto=webp&s=2ef2fb22247cf730c78f58d2cf31b1a9e3becbef");*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

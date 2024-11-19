@@ -7,6 +7,7 @@ import { BehaviorSubject } from "rxjs";
   providedIn: 'root'
 })
 export class ApiService {
+  private isDataFetched = false;
   wordsDatabase: string[] = [];
   englishWords: string[] = [];
   japaneseWords: string[] = [];
@@ -31,7 +32,12 @@ export class ApiService {
     this.japaneseWordsSubject.next(this.japaneseWords);
   }
 
-  private fetchWords() {
+  fetchWords() {
+    if (this.isDataFetched) {
+      console.log('Data already fetched, skipping API call.');
+      return;
+    }
+
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${this.spreadsheetID}/values/${this.sheetRange}?key=${this.apiKey}`;
 
     this.http.get<any>(url).subscribe(
@@ -40,8 +46,9 @@ export class ApiService {
           const rows = response.values;
           this.wordsDatabase = rows.flat();
           this.processWords(this.wordsDatabase)
+          this.isDataFetched = true;
           // console.log('DATA EXTRACT & PROCESS SUCCESS :', this.englishWords, this.japaneseWords);
-          console.log('DATA EXTRACT & PROCESS SUCCESS');
+          console.log('DATA EXTRACT & PROCESS : ' + this.isDataFetched);
         } else {
           console.error('No data found in response:', response);
         }
